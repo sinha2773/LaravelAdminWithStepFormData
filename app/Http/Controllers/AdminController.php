@@ -7,6 +7,13 @@ use App\Models\ContentPage;
 
 class AdminController extends Controller
 {
+    public function dashboard()
+    {
+        $totalPages = ContentPage::count();
+        $recentPages = ContentPage::latest()->take(5)->get();
+        return view('admin.dashboard', compact('totalPages', 'recentPages'));
+    }
+
     public function index()
     {
         $pages = ContentPage::all();
